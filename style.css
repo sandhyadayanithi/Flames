@@ -401,6 +401,9 @@ input:focus {
   transform: translateY(1px);
 }
 
+.circle-container.hidden {
+  display: none !important;
+}
 
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
