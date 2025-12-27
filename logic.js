@@ -26,8 +26,8 @@ resetBtn.addEventListener('click', resetGame);
 function startFlames() {
   if (isAnimating) return;
 
-  const n1 = name1Input.value.trim().toLowerCase().replace(/\s/g, '');
-  const n2 = name2Input.value.trim().toLowerCase().replace(/\s/g, '');
+  const n1 = name1Input.value.trim().toLowerCase();
+  const n2 = name2Input.value.trim().toLowerCase();
 
   if (!n1 || !n2) {
     alert("Please enter both names!");
@@ -46,23 +46,13 @@ function startFlames() {
 }
 
 function calculateFlamesCount(name1, name2) {
-  // Ensure lowercase
-  let arr1 = name1.toLowerCase().split('');
-  let arr2 = name2.toLowerCase().split('');
+  // Combine strings, ignore spaces
+  const combined = (name1 + name2).replace(/\s/g, '').toLowerCase();
 
-  // Standard FLAMES: Remove common characters
-  for (let i = 0; i < arr1.length; i++) {
-    const index = arr2.indexOf(arr1[i]);
-    if (index !== -1) {
-      arr1[i] = '*'; // Mark as removed in arr1
-      arr2[index] = '*'; // Mark as removed in arr2
-    }
-  }
+  // Count unique characters
+  const uniqueChars = new Set(combined);
 
-  const remaining1 = arr1.filter(c => c !== '*').length;
-  const remaining2 = arr2.filter(c => c !== '*').length;
-
-  return remaining1 + remaining2;
+  return uniqueChars.size;
 }
 
 async function startAnimation(stepCount) {
