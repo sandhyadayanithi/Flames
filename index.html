@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>FLAMES Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="main-container">
+    <div class="header">
+      <h1>FLAMES</h1>
+      <p class="subtitle">Discover your relationship status</p>
+    </div>
+
+    <div class="input-section">
+      <div class="input-group">
+        <input id="name1" type="text" placeholder="Your Name" autocomplete="off" />
+      </div>
+      <div class="input-group">
+        <input id="name2" type="text" placeholder="Partner's Name" autocomplete="off" />
+      </div>
+      <button class="calculate-btn">Calculate</button>
+    </div>
+
+    <div class="visualization-area">
+      <div id="tooltip" class="tooltip hidden">Counting...</div>
+
+      <div class="circle-container">
+        <div class="flame-item" data-value="F" data-full="Friends"><span class="letter">F</span><span
+            class="label">Friends</span></div>
+        <div class="flame-item" data-value="L" data-full="Love"><span class="letter">L</span><span
+            class="label">Love</span></div>
+        <div class="flame-item" data-value="A" data-full="Affection"><span class="letter">A</span><span
+            class="label">Affection</span></div>
+        <div class="flame-item" data-value="M" data-full="Marriage"><span class="letter">M</span><span
+            class="label">Marriage</span></div>
+        <div class="flame-item" data-value="E" data-full="Enemies"><span class="letter">E</span><span
+            class="label">Enemies</span></div>
+        <div class="flame-item" data-value="S" data-full="Siblings"><span class="letter">S</span><span
+            class="label">Siblings</span></div>
+      </div>
+
+      <div id="result-display" class="result-display hidden">
+        <div class="result-text"></div>
+        <button class="reset-btn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="logic.js"></script>
+</body>
+
+</html>

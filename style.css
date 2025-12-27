@@ -1,0 +1,405 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%);
+  --text-color: #ffffff;
+  --accent-color: #ff4757;
+  --accent-glow: rgba(255, 71, 87, 0.4);
+  --item-bg: rgba(255, 255, 255, 0.1);
+  --item-border: rgba(255, 255, 255, 0.2);
+  --highlight-color: #ffa502;
+  --highlight-glow: rgba(255, 165, 2, 0.6);
+  --circle-radius: 140px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main-container {
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #ff9f43, #ff4757);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+.input-section {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  transition: opacity 0.5s ease;
+}
+
+.input-section.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--item-border);
+  padding: 12px 20px;
+  border-radius: 25px;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 160px;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.calculate-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transfrom 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.calculate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.calculate-btn:active {
+  transform: translateY(1px);
+}
+
+/* VISUALIZATION AREA */
+.visualization-area {
+  position: relative;
+  height: 400px;
+  /* Space for the circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-container {
+  position: relative;
+  width: calc(var(--circle-radius) * 2);
+  height: calc(var(--circle-radius) * 2);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.flame-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  background: var(--item-bg);
+  border: 1px solid var(--item-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Centering logic handled by nth-child arithmetic below */
+}
+
+.flame-item .label {
+  position: absolute;
+  font-size: 0.6rem;
+  bottom: -20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.flame-item:hover .label {
+  opacity: 1;
+}
+
+/* Positioning logic: Rotate container then counter-rotate item */
+/* 6 items, 60deg apart. -90deg offset to start at top (12 o'clock) */
+
+.flame-item:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(270deg) translate(var(--circle-radius)) rotate(-270deg);
+}
+
+/* F */
+.flame-item:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(330deg) translate(var(--circle-radius)) rotate(-330deg);
+}
+
+/* L */
+.flame-item:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(30deg) translate(var(--circle-radius)) rotate(-30deg);
+}
+
+/* A */
+.flame-item:nth-child(4) {
+  transform: translate(-50%, -50%) rotate(90deg) translate(var(--circle-radius)) rotate(-90deg);
+}
+
+/* M */
+.flame-item:nth-child(5) {
+  transform: translate(-50%, -50%) rotate(150deg) translate(var(--circle-radius)) rotate(-150deg);
+}
+
+/* E */
+.flame-item:nth-child(6) {
+  transform: translate(-50%, -50%) rotate(210deg) translate(var(--circle-radius)) rotate(-210deg);
+}
+
+/* S */
+
+/* STATES */
+
+/* Active counting state */
+.flame-item.active {
+  background: var(--text-color);
+  color: var(--accent-color);
+  box-shadow: 0 0 25px var(--highlight-glow);
+  transform: translate(-50%, -50%) scale(1.3) !important;
+  /* Temporarily override position transform? No, need to combine */
+}
+
+.flame-item.active:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(270deg) translate(var(--circle-radius)) rotate(-270deg) scale(1.3);
+}
+
+.flame-item.active:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(330deg) translate(var(--circle-radius)) rotate(-330deg) scale(1.3);
+}
+
+.flame-item.active:nth-child(3) {
+  transform: translate(-50%, -50%) rotate(30deg) translate(var(--circle-radius)) rotate(-30deg) scale(1.3);
+}
+
+.flame-item.active:nth-child(4) {
+  transform: translate(-50%, -50%) rotate(90deg) translate(var(--circle-radius)) rotate(-90deg) scale(1.3);
+}
+
+.flame-item.active:nth-child(5) {
+  transform: translate(-50%, -50%) rotate(150deg) translate(var(--circle-radius)) rotate(-150deg) scale(1.3);
+}
+
+.flame-item.active:nth-child(6) {
+  transform: translate(-50%, -50%) rotate(210deg) translate(var(--circle-radius)) rotate(-210deg) scale(1.3);
+}
+
+/* Eliminated State */
+.flame-item.eliminated {
+  opacity: 0.2;
+  filter: grayscale(100%);
+  transform: translate(-50%, -50%) scale(0.8);
+  /* This breaks position if I don't specific nth-child again. */
+  /* Easier trick: just set transitions on opacity/filter. Position stays same. */
+}
+
+/* We don't want them to move when eliminated, just fade. Verify if they need to shrink. */
+/* If I don't change transform, they stay in place. */
+
+/* Winner State */
+.flame-item.winner {
+  background: white;
+  color: #ff4757;
+  box-shadow: 0 0 50px #ff4757;
+  z-index: 10;
+  /* Pulse animation handled by JS or keyframe? */
+  animation: winnerPulse 1.5s infinite;
+}
+
+.flame-item {
+  /* Reset visual styles on parent */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  /* Keep dimensions and flex for centering */
+}
+
+/* New visual bubble */
+.flame-item .letter {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ACTIVE STATE on inner letter */
+.flame-item.active .letter {
+  background: white;
+  color: #ff4757;
+  transform: scale(1.3);
+  box-shadow: 0 0 25px #ffa502;
+  border-color: #ffa502;
+}
+
+/* ELIMINATED STATE on inner letter */
+.flame-item.eliminated .letter {
+  opacity: 0.1;
+  /* Almost invisible */
+  transform: scale(0.5);
+  filter: grayscale(100%);
+}
+
+/* WINNER STATE */
+.flame-item.winner .letter {
+  background: white;
+  color: #ffca28;
+  /* Gold? or Red */
+  color: #ff4757;
+  transform: scale(1.5);
+  box-shadow: 0 0 60px rgba(255, 71, 87, 0.8);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+  }
+
+  to {
+    box-shadow: 0 0 40px rgba(255, 71, 87, 1);
+  }
+}
+
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 1;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tooltip.hidden {
+  opacity: 0;
+}
+
+.result-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 20;
+  width: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.result-display.show {
+  opacity: 1;
+  pointer-events: all;
+  /* Add a backdrop maybe? */
+}
+
+.result-text {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.reset-btn {
+  background: white;
+  color: #ff4757;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  background: #f8f9fa;
+}
+
+.reset-btn:active {
+  transform: translateY(1px);
+}
+
+.circle-container.hidden {
+  display: none;
+}
