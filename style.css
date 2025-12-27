@@ -40,6 +40,7 @@ body {
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #ff9f43, #ff4757);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -400,6 +401,71 @@ input:focus {
   transform: translateY(1px);
 }
 
-.circle-container.hidden {
-  display: none;
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  :root {
+    --circle-radius: 90px;
+    /* Smaller radius for mobile */
+  }
+
+  .main-container {
+    padding: 1rem;
+    padding-top: 40px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-section {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 2rem;
+  }
+
+  input {
+    width: 100%;
+    /* Full width inputs */
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .visualization-area {
+    height: 300px;
+    /* Reduced height */
+  }
+
+  .flame-item {
+    width: 45px;
+    height: 45px;
+  }
+
+  .flame-item .letter {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .flame-item .label {
+    font-size: 0.5rem;
+    bottom: -15px;
+  }
+
+  /* Result text size adjustments */
+  .result-text {
+    font-size: 1.5rem;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 350px) {
+  :root {
+    --circle-radius: 75px;
+  }
 }

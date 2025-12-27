@@ -74,10 +74,10 @@ async function startAnimation(stepCount) {
   tooltip.textContent = `Target count: ${stepCount}`;
 
   // Speed calculation
-  let speed = 400;
+  let speed = 400; // Slower base speed
   if (stepCount > 6) speed = 300;
-  if (stepCount > 12) speed = 150;
-  if (stepCount > 20) speed = 80;
+  if (stepCount > 12) speed = 200; // significantly slower than 150
+  if (stepCount > 20) speed = 100;
 
   // Outer loop: Eliminate until 1 remains
   while (activeIndices.length > 1) {
